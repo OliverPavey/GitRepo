@@ -1,7 +1,5 @@
 name: Build/Test Go Artifacts
 on: [workflow_dispatch]
-paths-ignore:
-  - 'test.sh'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,8 +14,8 @@ jobs:
         run: go get .
       - name: Build
         run: bash build.sh
-      # - name: Test
-      #   run: bash test.sh
+      - name: Test
+        run: bash test.sh
       - name: Upload artifact windows amd64
         uses: actions/upload-artifact@v6
         with:
