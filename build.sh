@@ -1,7 +1,22 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-mkdir -p build/windows/amd64
-mkdir -p build/linux/amd64
+targets=("windows/amd64" "linux/amd64")
 
-GOOS=windows GARCH=amd64 go build -o build/windows/amd64/gitrepo.exe gitrepo.go
-GOOS=linux   GARCH=amd64 go build -o build/linux/amd64/gitrepo       gitrepo.go
+for target in "${targets[@]}"; do
+    split=(${target//\// })
+    export GOOS=${split[0]}
+    export GOARCH=${split[1]}
+    
+    mkdir -p bin/$GOOS/$GOARCH
+
+    if [ $GOOS = 'windows' ]; 
+    then EXT=.exe 
+    else EXT= 
+    fi
+    OUTPUT='bin/'$GOOS'/'$GOARCH'/gitrepo'$EXT
+
+    go build -o $OUTPUT
+    
+    echo bin/$GOOS/$GOARCH:
+    ls -l bin/$GOOS/$GOARCH | tail -1
+done

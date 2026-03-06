@@ -24,4 +24,8 @@ open | o | Open the web repository web page in a browser
 
 ### To build the executables for cross platform
 
-`build.bat` or `.\build.sh`
+From bash (including Git bash on Windows):
+
+`.\build.sh`
+
+Builds the executables for Windows AMD64 and for Linux AMD64 platforms.
