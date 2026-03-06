@@ -1,5 +1,7 @@
 name: Build/Test Go Artifacts
 on: [workflow_dispatch]
+paths-ignore:
+  - 'test.sh'
 jobs:
   build:
     runs-on: ubuntu-latest
